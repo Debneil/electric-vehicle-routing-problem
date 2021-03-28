@@ -1,6 +1,6 @@
 # Instructions
   
-  1. Run the python script.
+  1. Run the python script (evrp-script.py).
   2. Follow the onscreen instructions, which have been provided below as well.
   3. Sample test cases can be found in testcases.txt
 
