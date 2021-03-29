@@ -22,8 +22,10 @@ def driver():
         "First line should contain the number of cities (n), the number of connected roads (any one direction) and the number of electric vehicles (k).")
     print(
         "Second line should contain the time period used to discretize time. 1s is a good place to start. Lesser values yield more accurate results, but tend to be more prone to errors.")
-    print("Follow this with n lines describing the roads, each containing the source, the destination, and the distance between, in order.")
-    print("Lastly, enter k pairs of lines describing the vehicles, the first line of each containing the source and destination, in order, and the second, the initial battery charge, the charging rate, the discharging rate, the maximum battery capacity, and the average speed of the vehicle, in order.\n")
+    print(
+        "Follow this with n lines describing the roads, each containing the source, the destination, and the distance between, in order.")
+    print(
+        "Lastly, enter k pairs of lines describing the vehicles, the first line of each containing the source and destination, in order, and the second, the initial battery charge, the charging rate, the discharging rate, the maximum battery capacity, and the average speed of the vehicle, in order.\n")
 
     # n -> number of cities (nodes / vertices); m -> number of roads (edges); k -> number of vehicles
     n, m, k = map(int, input().split(" "))
@@ -55,7 +57,8 @@ def driver():
 
     print("\nAssuming all distance and time measurements are provided in metres and seconds, respectively.")
     print(
-        "\nOptimal Time for all vehicles to reach their destinations is " + str(round(currentSolution, 2)) + "s ± 1s.\n")
+        "\nOptimal Time for all vehicles to reach their destinations is " + str(
+            round(currentSolution, 2)) + "s ± 1s.\n")
     for i in range(k):
         print("Vehicle " + str(i + 1) + ":")
 
@@ -132,7 +135,7 @@ def generate(state, currentVehicle=0):
             # charge the vehicle at current node
             if vehicleState.charge < vehicleState.info.maxCapacity and (
                     shortestPaths[vehicleState.position][vehicleState.info.destination][0]) / (
-                    vehicleState.info.averageSpeed) >= vehicleState.charge / vehicleState.info.dischargingRate:
+                    vehicleState.info.averageSpeed) > vehicleState.charge / vehicleState.info.dischargingRate:
                 # charge
                 if state.nodeState[vehicleState.position] == 0 or state.nodeState[
                     vehicleState.position] == vehicleState.info.id:
@@ -155,8 +158,15 @@ def generate(state, currentVehicle=0):
                 # wait
                 else:
                     vehicleState.timestamp += period
+                    t = vehicleState.route
+                    if vehicleState.route[-1][0] != 'W':
+                        vehicleState.route.append('Wait for 1s')
+                    else:
+                        vehicleState.route[-1] = vehicleState.route[-1][:9] + str(
+                            int(vehicleState.route[-1][9:-1]) + 1) + "s"
                     generate(state, currentVehicle + 1)
                     vehicleState.timestamp -= period
+                    vehicleState.route = t
 
             # move on
             state.nodeState[vehicleState.position] = 0
