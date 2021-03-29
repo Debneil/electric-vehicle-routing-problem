@@ -67,7 +67,7 @@ def driver():
                 vehicles[i].destination][
                 0]) + "m")
         print(
-            "Heuristic Underestimate (Time, to charge up enough to travel along shortest path at average speed, and then actually travel along shortest path at average speed): " + str(
+            "Heuristic Underestimate (Time): " + str(
                 vehicles[i].heuristicUnderestimate) + "s")
         print("Heuristic Route: " + " -> ".join(
             shortestPaths[vehicles[i].source][
