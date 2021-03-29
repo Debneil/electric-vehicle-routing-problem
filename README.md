@@ -24,7 +24,7 @@
   * It takes into account, for each vehicle, the possibilites of:
     *  either charging at the present station (if it is not occupied, and if the vehicle does not have the least amount of charge required to reach the destination node from the present node via the shortest route between those two nodes, as given by the heuristic algorithm, without stopping for charging anywhere in between), or,
     *  waiting to charge at present station, or,
-    *  moving on to any neighbouring node, provided that the vehicle has enough charge to move on to that node, and that the shortest path from that node to the destination of the vehicle does not pass through the current node (where the vehicle presently is).
+    *  moving on to any neighbouring node, provided that the vehicle has enough charge to move on to that node, that that neighbouring node has not been visited by the vehicle yet, and that the shortest path from that node to the destination of the vehicle does not pass through the current node (where the vehicle presently is).
   * After running passes through all the vehicles, the algorithm checks whether the present state is a valid solution, i.e., whether all vehicles have arrived.
     * If the present state is a valid solution, the algorithm compares the timestamp of the present state with the current solution (a global variable), and if the former is found to be lesser among the two, it is set as the new timestamp, and the present state is deepcopied to the solution state (also a global variable), after all of which, the algorithm goes back and continues the search.
     * If the present state is not a valid solution, the algorithm increments the state timestamp, and continues the search.
