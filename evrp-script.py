@@ -58,7 +58,7 @@ def driver():
     print("\nAssuming all distance and time measurements are provided in metres and seconds, respectively.")
     print(
         "\nOptimal Time for all vehicles to reach their destinations is " + str(
-            round(currentSolution, 2)) + "s ± 1s.\n")
+            round(currentSolution, 2)) + "s ± " + str(period) + "s.\n")
     for i in range(k):
         print("Vehicle " + str(i + 1) + ":")
 
@@ -142,10 +142,10 @@ def generate(state, currentVehicle=0):
                     vehicleState.charge = min(vehicleState.charge + vehicleState.info.chargingRate * period,
                                               vehicleState.info.maxCapacity)
                     if vehicleState.route[-1][0] != 'C':
-                        vehicleState.route.append('Charge for 1s')
+                        vehicleState.route.append('Charge for ' + str(period) + 's')
                     else:
                         vehicleState.route[-1] = vehicleState.route[-1][:11] + str(
-                            int(vehicleState.route[-1][11:-1]) + 1) + "s"
+                            int(vehicleState.route[-1][11:-1]) + period) + "s"
                     vehicleState.timestamp += period
                     generate(state, currentVehicle + 1)
                     vehicleState.timestamp -= period
@@ -157,10 +157,10 @@ def generate(state, currentVehicle=0):
                     vehicleState.timestamp += period
                     t = vehicleState.route
                     if vehicleState.route[-1][0] != 'W':
-                        vehicleState.route.append('Wait for 1s')
+                        vehicleState.route.append('Wait for ' + str(period) + 's')
                     else:
                         vehicleState.route[-1] = vehicleState.route[-1][:9] + str(
-                            int(vehicleState.route[-1][9:-1]) + 1) + "s"
+                            int(vehicleState.route[-1][9:-1]) + period) + "s"
                     generate(state, currentVehicle + 1)
                     vehicleState.timestamp -= period
                     vehicleState.route = t
