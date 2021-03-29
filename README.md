@@ -15,7 +15,7 @@
 
 # Heuristic Algorithm
   
-  * A slightly-modified, but optimal implementation of Dijkstra's Algorithm (using min-heaps) is used to precalculate shortest paths and the respective distances, between all pairs of nodes.
+  * A slightly-modified, but optimal implementation of Dijkstra's Algorithm (using min-heaps) is used to precalculate shortest paths (and respective distances), between all pairs of nodes.
   * A heuristic underestimate of time is calculated, for each vehicle, as the sum of the time taken for the vehicle to traverse aforementioned shortest path at average speed, and the time taken to charge the vehicle just enough for it to be able to traverse said distance.
 
 # Optimal Algorithm
